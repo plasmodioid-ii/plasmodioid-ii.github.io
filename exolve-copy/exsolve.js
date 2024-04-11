@@ -77,6 +77,8 @@ var exolvePuzzles;
  *    the puzzle object before removing all references to it. This will remove
  *    listeners for 'resize' and printing events, for example.
  */
+
+// hi
 function Exolve(puzzleSpec,
                 containerId='',
                 customizer=null,
