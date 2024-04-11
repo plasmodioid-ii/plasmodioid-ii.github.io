@@ -8725,7 +8725,7 @@ Exolve.prototype.createPuzzle = function() {
   this.setWordEndsAndHyphens();
   this.setUpGnav()
 
-  this.createIdIfNeeded();
+  // dead
 
   this.applyStyles()
 
