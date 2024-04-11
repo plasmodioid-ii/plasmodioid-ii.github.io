@@ -8783,7 +8783,8 @@ function createExolve(puzzleText, containerId="",
 function createPuzzle() {
   return createExolve(puzzleText, "");
 }
-function stopWatch() { 
+
+/** function stopWatch() { 
   if (timer) { 
       count++; 
 
@@ -8850,4 +8851,4 @@ startBtn.addEventListener('click', function () {
   }
   stopWatch(); 
 });
-console.log(this.timer)
+console.log(this.timer) */
