@@ -911,8 +911,6 @@ Exolve.prototype.init = function() {
       exolveHolder.id = 'exolve' + this.index;
     }
     exolveHolder.insertAdjacentHTML('beforeend', basicHTML);
-  } else {
-    document.body.insertAdjacentHTML('beforeend', basicHTML);
   }
   this.frame = document.getElementById(this.prefix + '-frame');
   if (this.fontFamily) {
