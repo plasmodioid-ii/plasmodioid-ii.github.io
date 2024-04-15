@@ -4503,8 +4503,10 @@ Exolve.prototype.computeGridSize = function(maxDim) {
 
 Exolve.prototype.setColumnLayout = function(cluesBoxWidth=0) {
   const vpWidth = this.getViewportWidth();
+  console.log('vpWidth', vpWidth)
   const gpBox = this.gridPanel.getBoundingClientRect();
   const gpWidth = gpBox.width || 481;
+  console.log(gpWidth)
   if (cluesBoxWidth > 0) {
     this.cluesBoxWidth = cluesBoxWidth;
   } else {
@@ -4516,14 +4518,15 @@ Exolve.prototype.setColumnLayout = function(cluesBoxWidth=0) {
      * 12 = rt margin of grid panel, 8 = rt margin of clues panel; subtract 20.
      */
     const availWidth = portWidth - gpWidth - 20;
-    if (availWidth < 400) {
+    console.log('available :', availWidth)
+    if (availWidth < 984) {
       /* Clues in a single column, under grid */
       this.cluesBoxWidth = gpWidth;
-    } else if (availWidth < 984) {
-      /* Clues in two columns to the right of the grid */
+    /**} else if (availWidth < 984) {
+      * Clues in two columns to the right of the grid
       this.cluesBoxWidth = Math.floor(availWidth / 2) - 12;
     } else {
-      this.cluesBoxWidth = 480;
+      this.cluesBoxWidth = 480; */
     }
   }
   console.assert(this.cluesBoxWidth > 0, this.cluesBoxWidth);
