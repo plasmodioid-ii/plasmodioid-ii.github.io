@@ -4506,6 +4506,7 @@ Exolve.prototype.setColumnLayout = function(cluesBoxWidth=0) {
   console.log('vpWidth', vpWidth)
   const gpBox = this.gridPanel.getBoundingClientRect();
   const gpWidth = gpBox.width || 481;
+  const gpWidth = 481;
   console.log(gpWidth)
   if (cluesBoxWidth > 0) {
     this.cluesBoxWidth = cluesBoxWidth;
