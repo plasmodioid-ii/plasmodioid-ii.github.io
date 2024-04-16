@@ -1209,6 +1209,7 @@ Exolve.prototype.parseOverall = function() {
       }
       this.cellW = parseInt(cellParts[0]);
       this.cellH = parseInt(cellParts[1]);
+      console.log(cellW, cellH)
       if (this.cellW <= 9 || this.cellH <= 9) {
         this.throwErr('exolve-cell-size: <width>, <height> must be >= 10');
       }
