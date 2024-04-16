@@ -298,18 +298,19 @@ function Exolve(puzzleSpec,
   this.STATES_SEP = 'xxllvv';  // xxllvv<id1>......xxllvv<id2>.....
 
   this.textLabels = {
-    'clear': 'clear square',
+    'clear-header': 'clear',
+    'clear-answer': 'answer',
     'clear.hover': 'Clear highlighted clues and squares. Clear crossers ' +
         'from full clues with a second click. Shortcut: Ctrl-q.',
-    'clear-all': 'clear puzzle',
+    'clear-all': 'puzzle',
     'clear-all.hover': 'Clear everything! A second click clears all ' +
         'placeholder entries in clues without known cells. Shortcut: Ctrl-Q.',
-    'check': 'check answer',
+    'check': 'answer',
     'check.hover': 'Erase mistakes in highlighted cells. Long-click to ' +
         'check just the current cell.',
-    'checkcell': 'check square',
+    'checkcell': 'check',
     'checkcell.hover': 'Erase the current cell if it\'s incorrect.',
-    'check-all': 'check puzzle',
+    'check-all': 'puzzle',
     'check-all.hover': 'Erase all mistakes. Reveal any available annos if ' +
         'no mistakes.',
     'copy-notes': 'Copy notes',
@@ -318,16 +319,16 @@ function Exolve(puzzleSpec,
     'email-notes.hover': 'Compose an email containing these notes as plain text. ' +
         'You can edit the draft before sending.',
     'email-notes-recipients.hover': ' Draft recipient(s): ',
-    'reveal': 'reveal answer',
+    'reveal': 'answer',
     'reveal.hover': 'Reveal highlighted clue/cells. Long-click to reveal ' +
         'just the current cell.',
-    'revealcell': 'reveal square',
+    'revealcell': 'reveal',
     'revealcell.hover': 'Reveal the solution letter in the current cell.',
     'show-ninas': 'Show ninas',
     'show-ninas.hover': 'Show ninas hidden in the grid/clues.',
     'hide-ninas': 'Hide ninas',
     'hide-ninas.hover': 'Hide ninas shown in the grid/clues.',
-    'reveal-all': 'reveal puzzle',
+    'reveal-all': 'puzzle',
     'reveal-all.hover': 'Reveal all solutions, available annos, answers, ' +
         'notes!',
     'submit': 'Submit',
@@ -423,18 +424,18 @@ function Exolve(puzzleSpec,
         'to squares.',
     'placeholder-copy': '&#8690;',
     'placeholder-copy.hover': 'Copy into currently highlighted squares.',
-    'confirm-clear-all': 'Are you sure you want to clear every entry!?',
+    'confirm-clear-all': 'Are you sure you want to clear the grid?',
     'confirm-clear-all-orphans1': 'Are you sure you want to clear every ' +
-        'entry!?  (The placeholder entries will not be cleared. To clear ' +
+        'entry?  (The placeholder entries will not be cleared. To clear ' +
         'the placeholders, click on clear-all again after clearing the grid.)',
     'confirm-clear-all-orphans2': 'Are you sure you want to clear every ' +
         'entry including all the placeholder entries!?',
-    'confirm-check-all': 'Are you sure you want to clear mistakes everywhere!?',
+    'confirm-check-all': 'Are you sure you want to clear mistakes everywhere?',
     'confirm-mismatched-copy': 'Are you sure you want to do this mismatched ' +
         'copy (#letters-from : #squares-to)? ',
     'confirm-show-ninas': 'Are you sure you want to reveal the nina(s)!?',
     'confirm-reveal-all': 'Are you sure you want to reveal the whole ' +
-        'solution!?',
+        'solution?',
     'confirm-submit': 'Are you sure you are ready to submit!?',
     'confirm-incomplete-submit': 'Are you sure you want to submit an ' +
         'INCOMPLETE solution!?',
@@ -567,6 +568,8 @@ Exolve.prototype.init = function() {
   this.index = exolvePuzzles[SPECIAL_ID]++;
   this.prefix = 'xlv' + this.index;
 
+  /** HTML CHECKPOINT */
+
   const basicHTML = `
     <div class="xlv-frame xlv-flex-col" tabindex="-1" id="${this.prefix}-frame">
       <h2 id="${this.prefix}-title" class="xlv-title"></h2>
@@ -575,26 +578,43 @@ Exolve.prototype.init = function() {
       <div id="${this.prefix}-clear-area" class="xlv-clear-area"></div>
       <div id="${this.prefix}-controls" class="xlv-controls">
       
-          
               <div id="${this.prefix}-button-row-1" class="xlv-controls-row">
-                <button id="${this.prefix}-clear"
-                    class="xlv-button">${this.textLabels['clear']}</button>
-                <button id="${this.prefix}-clear-all"
-                    class="xlv-button">${this.textLabels['clear-all']}</button>
-                <button id="${this.prefix}-check" class="xlv-button"
+        
+                <div class="dropdown xlv-button"
+                  <button id="${this.prefix}-clear-header"
+                    class="xlv-button">${this.textLabels['clear-header']}</button>
+                  <div class="dropdown-options">
+                  <button id="${this.prefix}-clear"
+                  class="xlv-button">${this.textLabels['clear-answer']}</button>
+                  <button id="${this.prefix}-clear-all"
+                  class="xlv-button">${this.textLabels['clear-all']}</button>
+                  </div>
+                </div>
+
+                <div class="dropdown xlv-button"
+                  <button id="${this.prefix}-checkcell" class="xlv-button">
+                  ${this.textLabels['checkcell']}</button>
+                    <div class="dropdown-options">
+                    <button id="${this.prefix}-check" class="xlv-button"
                     style="display:none">${this.textLabels['check']}</button>
-                <button id="${this.prefix}-check-all" class="xlv-button"
-                  style="display:none">${this.textLabels['check-all']}</button>
-                <button id="${this.prefix}-checkcell" class="xlv-button"
-                    style="display:none">${this.textLabels['checkcell']}</button>
-                <button id="${this.prefix}-revealcell" class="xlv-button"
-                    style="display:none">${this.textLabels['revealcell']}</button>
-                <button id="${this.prefix}-reveal" class="xlv-button"
+                    <button id="${this.prefix}-check-all" class="xlv-button"
+                    style="display:none">${this.textLabels['check-all']}</button>
+                  </div>
+                </div>
+
+                <div class="dropdown xlv-button"
+                <button id="${this.prefix}-revealcell" class="xlv-button">
+                ${this.textLabels['revealcell']}</button>
+                    <div class="dropdown-options">
+                    <button id="${this.prefix}-reveal" class="xlv-button"
                     style="display:none">${this.textLabels['reveal']}</button>
+                    <button id="${this.prefix}-reveal-all" class="xlv-button"
+                    style="display:none">${this.textLabels['reveal-all']}</button>
+                  </div>
+                </div>
+                
                 <button id="${this.prefix}-ninas" class="xlv-button"
                   style="display:none">${this.textLabels['show-ninas']}</button>
-                <button id="${this.prefix}-reveal-all" class="xlv-button"
-                  style="display:none">${this.textLabels['reveal-all']}</button>
               </div> <!-- xlv-button-row-1 -->
             </div> <!-- xlv-controls -->
       <div id="${this.prefix}-grid-and-clues" class="xlv-grid-and-clues-flex">
