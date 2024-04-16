@@ -1,4 +1,4 @@
-  /*
+/*
 MIT License
 
 Copyright (c) 2019 Viresh Ratnakar
@@ -298,18 +298,18 @@ function Exolve(puzzleSpec,
   this.STATES_SEP = 'xxllvv';  // xxllvv<id1>......xxllvv<id2>.....
 
   this.textLabels = {
-    'clear': 'Clear this',
+    'clear': 'clear square',
     'clear.hover': 'Clear highlighted clues and squares. Clear crossers ' +
         'from full clues with a second click. Shortcut: Ctrl-q.',
-    'clear-all': 'Clear all!',
+    'clear-all': 'clear puzzle',
     'clear-all.hover': 'Clear everything! A second click clears all ' +
         'placeholder entries in clues without known cells. Shortcut: Ctrl-Q.',
-    'check': 'Check this',
+    'check': 'check answer',
     'check.hover': 'Erase mistakes in highlighted cells. Long-click to ' +
         'check just the current cell.',
-    'checkcell': 'Check cell',
+    'checkcell': 'check square',
     'checkcell.hover': 'Erase the current cell if it\'s incorrect.',
-    'check-all': 'Check all!',
+    'check-all': 'check puzzle',
     'check-all.hover': 'Erase all mistakes. Reveal any available annos if ' +
         'no mistakes.',
     'copy-notes': 'Copy notes',
@@ -318,16 +318,16 @@ function Exolve(puzzleSpec,
     'email-notes.hover': 'Compose an email containing these notes as plain text. ' +
         'You can edit the draft before sending.',
     'email-notes-recipients.hover': ' Draft recipient(s): ',
-    'reveal': 'Reveal this',
+    'reveal': 'reveal answer',
     'reveal.hover': 'Reveal highlighted clue/cells. Long-click to reveal ' +
         'just the current cell.',
-    'revealcell': 'Reveal cell',
+    'revealcell': 'reveal square',
     'revealcell.hover': 'Reveal the solution letter in the current cell.',
     'show-ninas': 'Show ninas',
     'show-ninas.hover': 'Show ninas hidden in the grid/clues.',
     'hide-ninas': 'Hide ninas',
     'hide-ninas.hover': 'Hide ninas shown in the grid/clues.',
-    'reveal-all': 'Reveal all!',
+    'reveal-all': 'reveal puzzle',
     'reveal-all.hover': 'Reveal all solutions, available annos, answers, ' +
         'notes!',
     'submit': 'Submit',
@@ -575,16 +575,7 @@ Exolve.prototype.init = function() {
       <div id="${this.prefix}-clear-area" class="xlv-clear-area"></div>
       <div id="${this.prefix}-controls" class="xlv-controls">
       
-          <button id="start" class="xlv_button time_button"> 
-              <span class="digit" id="hr"> 
-                  00</span> 
-              <span class="txt">:</span> 
-              <span class="digit" id="min"> 
-                  00</span> 
-              <span class="txt">:</span> 
-              <span class="digit" id="sec"> 
-                  00</span> 
-          </button> 
+          
               <div id="${this.prefix}-button-row-1" class="xlv-controls-row">
                 <button id="${this.prefix}-clear"
                     class="xlv-button">${this.textLabels['clear']}</button>
