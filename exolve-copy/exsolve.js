@@ -4513,7 +4513,7 @@ Exolve.prototype.setColumnLayout = function(cluesBoxWidth=0) {
     const frameBox = this.frame.getBoundingClientRect();
     const xStart = Math.max(frameBox.left, 0);
     const xEnd = frameBox.right > 0 ? Math.min(frameBox.right, vpWidth) : vpWidth;
-    const portWidth = xEnd - xStart;
+    const portWidth = 800;
     /**
      * 12 = rt margin of grid panel, 8 = rt margin of clues panel; subtract 20.
      */
@@ -4521,7 +4521,7 @@ Exolve.prototype.setColumnLayout = function(cluesBoxWidth=0) {
     console.log('available :', availWidth)
     if (availWidth < 984) {
       /* Clues in a single column, under grid */
-      this.cluesBoxWidth = gpWidth;
+      this.cluesBoxWidth = 481;
     /**} else if (availWidth < 984) {
       * Clues in two columns to the right of the grid
       this.cluesBoxWidth = Math.floor(availWidth / 2) - 12;
