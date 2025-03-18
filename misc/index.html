@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,9 +22,14 @@
         }
 
         .carousel {
-            width: 300px; /* Fixed width */
-            float: right; /* Floats to the left, text wraps around it */
-            margin: 15px 0px 15px 15px; /* Adds spacing to separate text */
+            width: 300px;
+            /* Fixed width */
+            height: 200px;
+            overflow: hidden;
+            float: right;
+            /* Floats to the left, text wraps around it */
+            margin: 15px 0px 15px 15px;
+            /* Adds spacing to separate text */
             position: relative;
         }
 
@@ -37,7 +43,8 @@
         }
 
         /* Buttons for navigation */
-        .prev, .next {
+        .prev,
+        .next {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
@@ -55,58 +62,161 @@
         .next {
             right: 5px;
         }
+
+        .scroll-line {
+            position: absolute;
+            top: 1590px;
+            left: 50%;
+            /* Center it */
+            width: 3px;
+            /* Adjust thickness */
+            height: 8vh;
+            /* Full height */
+            background: rgb(0, 0, 0);
+            /* Adjust color */
+            opacity: 1;
+            filter: blur(0px);
+            transition: opacity 0.2s ease-out, filter 0.2s ease-out;
+            transform: translateX(-50%);
+            /* Center alignment */
+        }
     </style>
     <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll(".carousel-image");
-        
-        function changeSlide(direction) {
-            slides[currentSlide].classList.remove("active");
-            currentSlide = (currentSlide + direction + slides.length) % slides.length;
-            slides[currentSlide].classList.add("active");
-        }
-        
-        // Auto-change slides every 3 seconds
-        setInterval(() => changeSlide(1), 3000);
-        </script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll(".carousel-image");
+            const prevButton = document.querySelector(".prev");
+            const nextButton = document.querySelector(".next");
+
+            function changeSlide(direction) {
+                slides[currentSlide].classList.remove("active");
+                currentSlide = (currentSlide + direction + slides.length) % slides.length;
+                slides[currentSlide].classList.add("active");
+            }
+
+            // Attach event listeners after the DOM has loaded
+            prevButton.addEventListener("click", function () {
+                changeSlide(-1);
+            });
+
+            nextButton.addEventListener("click", function () {
+                changeSlide(1);
+            });
+
+            // Auto-change slides every 3 seconds
+            setInterval(() => changeSlide(1), 3000);
+        });
+
+        document.addEventListener("scroll", function () {
+            let scrollPosition = window.scrollY - 600;
+            let maxScroll = document.body.scrollHeight - window.innerHeight;
+            let fadeAmount = scrollPosition / maxScroll;
+
+            let blurValue = fadeAmount * 10; // Increase blur with scroll
+            let opacityValue = 1 - fadeAmount * 1.2; // Decrease opacity with scroll
+
+            // Limit max blur and min opacity
+            if (opacityValue < 0) opacityValue = 0;
+            if (blurValue > 10) blurValue = 10;
+
+            document.querySelector(".scroll-line").style.opacity = opacityValue;
+            document.querySelector(".scroll-line").style.filter = `blur(${blurValue}px)`;
+        });
+    </script>
+
     <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="content-box">
+        <img src="./goofy.png" alt="The Student News Site of Burlingame High School"
+            style="display: block; margin: auto; width: 800px;">
         <h1 style="font-family: 'Frank Ruhl Libre', serif; font-size: 44px">Online editor — Letter of Intent</h1>
         <p style="font-size: 16px; margin: 0 0 20px">
-        Alex Bertelli, Senior Reporter • March 18, 2025
+            Alex Bertelli, Senior Reporter • March 18, 2025
         </p>
         <p>
-        As a J2 student, journalism has shown me a lot about the community and my place within it. Previously shier and less involved beyond my own circles, this class has introduced me to new people, skills, and unique experiences that have shaped me as both a reporter and a person. I’ve grown fond of this program during my time here, and wish to step up as online editor to play my role in continuing the B’s legacy as a high-quality and informative publication. I believe my multidisciplinary experience, leadership and delegation skills, technical knowledge, and thoroughness make me best fit to take on this responsibility in the coming year.
+            As a J2 student, journalism has shown me a lot about the community and my place within it. Previously shier
+            and less involved beyond my own circles, this class has introduced me to new people, skills, and unique
+            experiences that have shaped me as both a reporter and a person. I’ve grown fond of this program during my
+            time here, and wish to step up as Online Editor to play my role in continuing the B’s legacy as a
+            high-quality and informative publication. I believe my multidisciplinary experience, leadership and
+            delegation skills, technical knowledge, and thoroughness make me a great fit to take on this responsibility
+            in the coming year.
         </p>
         <div class="text-wrapper">
             <div class="carousel">
                 <img src="./img1.png" class="carousel-image active">
-                <img src="image2.jpg" class="carousel-image">
-                <img src="image3.jpg" class="carousel-image">
+                <img src="./img2.png" class="carousel-image">
+                <img src="./img3.png" class="carousel-image">
                 <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
                 <button class="next" onclick="changeSlide(1)">&#10095;</button>
             </div>
             <p>
-            Even since before journalism, one of my values as a writer has been dedication to the craft. I love digging deep into my topics — fiction or nonfiction — and searching for ways to add more intricate detail, nuance, or soul to the stories I write. My curiosity has drawn me towards profiles and features; my care for details of all sizes has compelled me to write thoroughly and with an eye for multiple different angles. Asking questions about the small details as well as the bigger picture has benefited me as a writer and editor of other’s work; it’s what would enable me to most effectively feature other’s work and ensure the quality of our online pieces.
+                Even since before journalism, one of my values as a writer has been dedication to the craft. I love
+                digging deep into my topics — fiction or nonfiction — and searching for ways to add more intricate
+                detail, nuance, or soul to the stories I write. My curiosity has drawn me towards profiles and features;
+                my care for details of all sizes has compelled me to write thoroughly and with an eye for multiple
+                different angles. Asking questions about the small details as well as the bigger picture has benefited
+                me as a writer and editor; it’s what would enable me to most effectively feature other’s work and ensure
+                the quality of our online pieces.
             </p>
         </div>
         <p>
-        While robotics has been a dual, sometimes competing force in my life, it’s also given me valuable experience leading underclassmen and keeping track of a variety of tasks over the course of many months. A co-lead and I led the freshman training program for this year, which involved delegating work, communicating with lots of people, and making sure tasks got completed with timeliness in pursuit of a long-term goal. Treating journalism with the same passion, I see multiple parallels: communicating with staffers to make sure articles meet their deadlines, forming bonds to help grow community, and making steady progress towards achievements like SNO distinction throughout the year.
+            While robotics has been a dual, sometimes competing force in my life, it’s also given me valuable experience
+            leading underclassmen and keeping track of a variety of tasks over the course of many months. A co-lead and
+            I led the freshman training program for this year, which involved delegating work, communicating with lots
+            of people, and making sure tasks got completed with timeliness in pursuit of a long-term goal. Even more
+            importantly, I formed strong relationships with new students that encouraged many to continue going with the
+            club. Treating journalism with the same passion, I see multiple parallels: to be an effective Online Editor,
+            I plan to strengthen bonds with existing and future journalism students; communicate with staffers to make
+            sure they feel supported and can meet their deadlines; and make steady progress towards achievements like
+            SNO distinction throughout the year.
         </p>
         <p>
-        Another parallel is technical knowledge: I believe I am well-equipped to handle the website itself. In addition to background experience with HTML, CSS, and Javascript, I have worked directly with the SNO web interface to put up crosswords and pre-publish them. Part of putting up the crosswords on our website — even if a relatively minor thing — involved figuring out a way to embed custom code without breaking the display, hosting the puzzles on our Github (created for this purpose!), and tailoring the UI to fit both our theme and the constraints of the site. My intentions were perhaps beyond the scope of wordpress, but it was that ambition and higher standard that drove me to problem-solve it regardless. I have this same sense of ambition towards our web displays and presentation — seeing the things Connie has done to make articles immersive inspires me to continue pushing the bounds of possibility, be it through integrating more SNO elements or altogether blurring the line between story and experience.
+            Yet another parallel is technical knowledge: I believe I am well-equipped to handle the website itself. In
+            addition to background experience with HTML, CSS, and Javascript, I have worked directly with the SNO web
+            interface to put up crosswords and pre-publish them. Part of putting up the <a
+                href="https://theburlingameb.org/9644/showcase/october-issue-crossword/">crosswords</a> on our website —
+            even
+            if a relatively minor thing — involved figuring out a way to embed custom code without breaking the
+            display,
+            hosting the puzzles on our <a href="https://theburlingameb.github.io/">Github</a> (created for this
+            purpose!), and tailoring the UI to fit both our theme and the constraints of the site. My
+            intentions were
+            perhaps beyond the scope of wordpress, but it was that
+            ambition and higher standard that drove me to problem-solve it regardless. I have this same sense of
+            ambition towards our web displays and presentation — seeing the things Connie has done to make
+            articles
+            immersive inspires me to continue pushing the bounds of possibility, be it through integrating more
+            interactive SNO elements or altogether blurring the line between story and experience.
+        </p>
+        <div class="scroll-line">
+        </div>
+        <h1 style="text-align: center; display: inline-block; margin-left: 32%; padding-bottom: 15px">Story</h1>
+        <h1 style="display: inline-block; margin-left: 55px" ;>Experience</h1>
+        <p>
+            More broadly, I’m pursuing Online Editor to continue learning and growing as a person. Part of why
+            Journalism is so rewarding is because it pushes me past my comfort zone, often feeding me new problems and
+            requiring me to adapt on the fly. I’ve dealt with my fair share of issues in the past — dubious angles,
+            missing photos, elusive sources — and each brought with it a valuable lesson alongside practice resolving
+            them in real time, whether that involved deep research, extensive communication, arranging and conducting
+            interviews while out-of-country, or more. Being Online Editor would provide another unique opportunity to
+            develop my skills and leadership, and I believe I have the responsibility to step up and give the role the
+            dedication it deserves — to not only do it, but do it well.
         </p>
         <p>
-        The last reason I’m pursuing online editor is to continue learning and growing as a person. Part of why Journalism is so rewarding is because it pushes me past my comfort zone, often feeding me new problems and requiring me to adapt on the fly. I’ve dealt with my fair share of issues in the past — dubious angles, missing photos, elusive sources — and each brought with it a valuable lesson alongside practice resolving them in real time, whether that involved deep research, extensive communication, arranging and conducting interviews while out-of-country, or more. [ ]
+            As a J2 student, journalism has shown me a lot about myself and who I want to be. In the past many months
+            I’ve grown as a writer, page-designed, taken photos and made graphics, travelled far places to cover beats,
+            and configured web displays for custom crossword puzzles. Going forward, I want to take on more
+            responsibility as an Online Editor, combining my past experience and current ambitions to continue caring
+            for our incredible website.
         </p>
-        <p>
-        As a J2 student, journalism has shown me a lot about myself and who I want to be. In the past many months I’ve grown as a writer, page-designed, taken photos and made graphics, travelled far places to cover beats, and configured web displays for custom crossword puzzles. Going forward, I want to take on more responsibility as an online editor, combining my past experience and current ambitions to continue caring for our incredible website.
-        </p>
-        <p style="text-align: right">
-        — Alex
+        <div style="padding-bottom:40px"></div>
+        <p style="text-align: right; padding-bottom: 200px">
+            — Alex
         </p>
     </div>
 </body>
+
 </html>
